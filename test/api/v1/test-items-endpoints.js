@@ -23,7 +23,7 @@ describe('/api/v1/items endpoints', () => {
   })
 
   describe('GET /api/v1/items', () => {
-    it('Returns all items scraped from web', () => {
+    it('returns all items scraped from web', () => {
       chai.request(app)
         .get('/api/v1/items')
         .then((response) => {
