@@ -24,6 +24,12 @@ describe('/api/v1/items endpoints', function() {
     })
   })
 
+  after(() => {
+    Item.remove({}, (err) => {
+      if (err) throw err
+    })
+  })
+
   describe('GET /api/v1/items', () => {
     it('returns all items scraped from web', () => {
       return chai.request(app)
