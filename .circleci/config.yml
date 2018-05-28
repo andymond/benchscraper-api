@@ -3,11 +3,5 @@ jobs:
    build:
      docker:
        - image: circleci/node:9.4.0
-       environment:
-         DATABASE: benchscraper_test
-
      steps:
-       machine:
-         services:
-           - mongodb
        - checkout
