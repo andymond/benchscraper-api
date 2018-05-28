@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+  docker:
+    - image: circleci/node:9.4.0
+    - image: mongo:3.6.5
+    environment:
+      DATABASE: benchscraper_test
+
+  steps:
+    machine:
+      services:
+        - mongodb
+    - checkout
