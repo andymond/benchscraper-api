@@ -6,25 +6,27 @@ const should = chai.should();
 const chaiHTTP = require('chai-http');
 chai.use(chaiHTTP);
 
-describe('/api/v1/items endpoints', () => {
+describe('/api/v1/items endpoints', function() {
+  this.timeout(0)
 
-  before((done) => {
+  before(() => {
     let items = [
       {name: "donuts", price: "$1.30", seller: "Costco"},
       {name: "donuts", price: "$1.65", seller: "Sams Club"},
       {name: "donuts", price: "$1.24", seller: "BJs"}
     ]
-    Item.save(items)
-    .then(() => done())
-    .catch((error) => {
-      throw error;
+
+    items.forEach((item) => {
+      new_item = new Item(item)
+      new_item.save((err) => {
+        if (err) throw err;
+      })
     })
-    .done();
   })
 
   describe('GET /api/v1/items', () => {
-    xit('returns all items scraped from web', () => {
-      chai.request(app)
+    it('returns all items scraped from web', () => {
+      return chai.request(app)
         .get('/api/v1/items')
         .then((response) => {
           response.should.have.status(200)
@@ -39,7 +41,9 @@ describe('/api/v1/items endpoints', () => {
           response.body[0].seller.should.eq('Costco')
           response.body[1].seller.should.eq('Sams Club')
           response.body[2].seller.should.eq('BJs')
-
+        })
+        .catch((err) => {
+          throw err;
         })
     })
   })
