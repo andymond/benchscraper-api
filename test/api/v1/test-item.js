@@ -7,7 +7,9 @@ describe('Item model', function() {
   this.timeout(0)
 
   afterEach(() => {
-    Item.remove()
+    Item.remove({}, (err) => {
+      if (err) throw err
+    })
   });
 
   it('can create a new item', () => {
