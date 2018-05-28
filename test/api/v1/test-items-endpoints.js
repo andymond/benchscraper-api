@@ -13,7 +13,7 @@ describe('/api/v1/items endpoints', function() {
     let items = [
       {name: "donuts", price: "$1.30", seller: "Costco"},
       {name: "donuts", price: "$1.65", seller: "Sams Club"},
-      {name: "donuts", price: "$1.24", seller: "BJs"}
+      {name: "cannoli", price: "$1.24", seller: "BJs"}
     ]
 
     items.forEach((item) => {
@@ -40,7 +40,7 @@ describe('/api/v1/items endpoints', function() {
           response.body.length.should.eq(3)
           response.body[0].name.should.eq('donuts')
           response.body[1].name.should.eq('donuts')
-          response.body[2].name.should.eq('donuts')
+          response.body[2].name.should.eq('cannoli')
           response.body[0].price.should.eq('$1.30')
           response.body[1].price.should.eq('$1.65')
           response.body[2].price.should.eq('$1.24')
@@ -51,6 +51,25 @@ describe('/api/v1/items endpoints', function() {
         .catch((err) => {
           throw err;
         })
+    })
+  })
+
+  describe('GET /api/v1/items?name=donuts', () => {
+    it('returns items with matching name', () => {
+      return chai.request(app)
+      .get('/api/v1/items')
+      .query({name: 'donuts'})
+      .then((response) => {
+        response.should.have.status(200)
+        response.body.should.be.an('array')
+        response.body.length.should.eq(2)
+        response.body[0].name.should.eq('donuts')
+        response.body[1].name.should.eq('donuts')
+        response.body[0].price.should.eq('$1.30')
+        response.body[1].price.should.eq('$1.65')
+        response.body[0].seller.should.eq('Costco')
+        response.body[1].seller.should.eq('Sams Club')
+      })
     })
   })
 })

@@ -31,4 +31,5 @@ describe('Item model', function() {
       throw e
     })
   })
+  
 });
