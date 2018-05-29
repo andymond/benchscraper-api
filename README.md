@@ -2,8 +2,13 @@
 RESTful API to provide food pricing info scraped from the web
 
 ## Endpoints
-```GET /api/v1/items``` - view all scraped items, item attributes are name, price & seller
-```GET /api/v1/items?attribute=value``` - search api for a specific item based on name, price or seller
+view all scraped items, item attributes are name, price & seller
+
+```GET /api/v1/items```
+
+search api for a specific item based on name, price or seller
+
+```GET /api/v1/items?attribute=value``` 
 
 ## Stack
 * Node.js
@@ -11,6 +16,7 @@ RESTful API to provide food pricing info scraped from the web
 
 ## Setup
 clone repo
+
 install packages:
 ```npm install```
 
